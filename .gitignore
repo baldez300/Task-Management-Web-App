@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+
+# IDE
+.idea/
+
+# Environment
+.env
+.venv
+env/
+
+# Dummy file
+dummy.txt
+zForDummyStaff.md
+```
+projectInfo.md
