@@ -74,7 +74,7 @@ This is a simple web application built with Python Flask, MySQL, HTML and CSS fo
    USE task_manager;
    DROP USER IF EXISTS 'appuser'@'localhost';
    CREATE USER 'appuser'@'localhost' IDENTIFIED BY 'password';
-   GRANT ALL PRIVILEGES ON task_manager.* TO 'task_manager'@'localhost';
+   GRANT ALL PRIVILEGES ON task_manager.* TO 'appuser'@'localhost';
    FLUSH PRIVILEGES;
    EXIT;
    ```
