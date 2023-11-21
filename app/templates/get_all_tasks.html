@@ -12,9 +12,17 @@
 
         <div class="container">
             <h2>Task List</h2>
-            <!-- Display tasks here -->
+            {% if tasks %}
+                <ul>
+                    {% for task in tasks %}
+                        <li>{{ task.title }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No tasks available.</p>
+            {% endif %}
         </div>
-
+    
     {% endblock %}
 </body>
 </html>

@@ -12,8 +12,11 @@
 
         <div class="container">
             <h2>New Task</h2>
-            <!-- Form for creating a new task -->
-        </div>
+            <form method="POST" action="{{ url_for('app.create_new_task') }}">
+                <!-- Task details input fields go here -->
+                <button type="submit">Create Task</button>
+            </form>
+        </div>    
 
     {% endblock %}
 </body>
