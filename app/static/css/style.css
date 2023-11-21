@@ -66,3 +66,18 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* for index.html file below */
+
+.container-logout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px; 
+    background-color: #fff; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+
+
+

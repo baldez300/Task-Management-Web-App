@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Project - Edit Task</title>
+    <!-- Add any additional styles or scripts you may need -->
+</head>
+<body>
+
+    {% extends 'layout.html' %}
+    {% block content %}
+
+        <div class="container">
+            <h2>Edit Task</h2>
+            <form method="POST" action="{{ url_for('app.edit_task', task_id=task.id) }}">
+                <!-- Task details input fields pre-filled with current values go here -->
+                <button type="submit">Update Task</button>
+            </form>
+        </div>    
+
+    {% endblock %}
+</body>
+</html>

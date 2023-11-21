@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome - Your Project Name</title>
+    <title>Welcome - Task Manager Pro</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!-- Add any additional styles or scripts you may need -->
 </head>
 <body>
-    <div class="container">
-        <h2>Welcome, {{ current_user.username }}!</h2>
-        
-        <!-- Logout Button Form -->
-        <form method="POST" action="{{ url_for('app.logout') }}">
-            <button type="submit">Logout</button>
-        </form>
+    
+    {% extends 'layout.html' %}
+    {% block content %}
 
-        <!-- Your remaining content goes here -->
-        <!-- For example, links to other pages, task lists, etc. -->
+        <div class="container-logout">
+            <h2>Welcome, {{ current_user.username }}!</h2>
+            
+            <!-- Logout Button Form -->
+            <form method="POST" action="{{ url_for('app.logout') }}">
+                <button type="submit">Logout</button>
+            </form>
 
-    </div>
+            <!-- Your remaining content goes here -->
+            <!-- For example, links to other pages, task lists, etc. -->
+
+        </div>
+    
+    {% endblock %}
+    
 </body>
 </html>

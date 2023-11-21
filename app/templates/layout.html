@@ -1,0 +1,35 @@
+﻿<!-- layout.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Task Manager Pro{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Add any additional styles or scripts you may need -->
+</head>
+<body>
+
+    <header>
+        <h1>Task Manager Pro</h1>
+        <!-- Add any additional header content or navigation links here -->
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('app.index') }}">Home</a></li>
+            <li><a href="{{ url_for('app.get_all_tasks') }}">Tasks</a></li>
+            <!-- Add additional menu items as needed -->
+        </ul>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Task Manager Pro. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
