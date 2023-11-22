@@ -101,7 +101,7 @@ def create_new_task():
         db.session.commit()
 
         flash('Task created successfully!', 'success')
-        return redirect(url_for('app.tasks'))
+        return redirect(url_for('app.get_all_tasks'))
 
     return render_template('create_new_task.html')
 
@@ -143,6 +143,6 @@ def delete_task(task_id):
         db.session.commit()
 
         flash('Task deleted successfully!', 'success')
-        return redirect(url_for('app.tasks'))
+        return redirect(url_for('app.get_all_tasks'))
 
     return render_template('delete_task.html', task=task)
