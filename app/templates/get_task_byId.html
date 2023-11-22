@@ -3,23 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Project - Delete Task</title>
+    <title>Your Project - Task</title>
     <!-- Add any additional styles or scripts you may need -->
 </head>
 <body>
 
     {% extends 'layout.html' %}
     {% block content %}
-    
+
         <div class="container">
-            <h2>Delete Task</h2>
-            <p>Are you sure you want to delete this task?</p>
-            <form method="POST" action="{{ url_for('app.delete_task', task_id=task.id) }}">
-                <button type="submit">Delete Task</button>
-            </form>
-        </div>    
+            <!-- Display details of the specific task -->
+        </div>
 
     {% endblock %}
-    
+
 </body>
 </html>

@@ -17,12 +17,16 @@ def register():
         return redirect(url_for('app.index'))
 
     if request.method == 'POST':
+        print(request.form)
+        firstname = request.form['first_name']
+        lastname = request.form['last_name']
+        email = request.form['email']
         username = request.form['username']
         password = request.form['password']
 
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
-        new_user = User(username=username, password=hashed_password)
+        new_user = User(firstname=firstname, lastname=lastname, email=email, username=username, password=hashed_password)
 
         db.session.add(new_user)
         db.session.commit()
@@ -67,13 +71,13 @@ def index():
 
 @blueprint.route('/tasks')
 @login_required
-def tasks():
+def get_all_tasks():
     tasks = Task.query.filter_by(user_id=current_user.id).all()
-    return render_template('tasks.html', tasks=tasks)
+    return render_template('get_all_tasks.html', tasks=tasks)
 
 @blueprint.route('/tasks/new', methods=['GET', 'POST'])
 @login_required
-def new_task():
+def create_new_task():
     if request.method == 'POST':
         # Get task details from the form
         title = request.form['title']
@@ -83,7 +87,7 @@ def new_task():
         status = request.form['status']
 
         # Create a new task
-        new_task = Task(
+        create_new_task = Task(
             title=title,
             description=description,
             due_date=due_date,
@@ -93,19 +97,19 @@ def new_task():
         )
 
         # Add the task to the database
-        db.session.add(new_task)
+        db.session.add(create_new_task)
         db.session.commit()
 
         flash('Task created successfully!', 'success')
         return redirect(url_for('app.tasks'))
 
-    return render_template('new_task.html')
+    return render_template('create_new_task.html')
 
 @blueprint.route('/tasks/<int:task_id>')
 @login_required
-def task(task_id):
+def get_task_by_id(task_id):
     task = Task.query.get_or_404(task_id)
-    return render_template('task.html', task=task)
+    return render_template('get_task_byId.html', task=task)
 
 @blueprint.route('/tasks/<int:task_id>/edit', methods=['GET', 'POST'])
 @login_required
