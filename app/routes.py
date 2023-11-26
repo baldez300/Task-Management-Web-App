@@ -109,7 +109,7 @@ def create_new_task():
 @login_required
 def get_task_by_id(task_id):
     task = Task.query.get_or_404(task_id)
-    return render_template('get_task_byId.html', task=task)
+    return render_template('get_task_by_id.html', task=task)
 
 @blueprint.route('/tasks/<int:task_id>/edit', methods=['GET', 'POST'])
 @login_required

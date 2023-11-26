@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Project - Task</title>
+    <!-- Add any additional styles or scripts you may need -->
+</head>
+<body>
+
+    {% extends 'layout.html' %}
+    {% block content %}
+
+        <!-- get_task_by_id.html -->
+        <div class="container">
+            <!-- Display details of the specific task -->
+            <h2>Task Details</h2>
+            <p>Task ID: {{ task.id }}</p>
+            <p>Task Title: {{ task.title }}</p>
+            <p>Task Description: {{ task.description }}</p>
+            <p>Task Due Date: {{ task.due_date }}</p>
+            <p>Task Priority: {{ task.priority }}</p>
+            <p>Task Status: {{ task.status }}</p>
+            <p>Task Created: {{ task.created }}</p>
+            <p>Task Last Updated: {{ task.last_updated }}</p>
+
+            <a href="{{ url_for('app.edit_task', task_id=task.id) }}">Edit Task</a>
+        </div>
+
+
+    {% endblock %}
+
+</body>
+</html>
