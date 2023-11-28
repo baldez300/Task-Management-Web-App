@@ -128,7 +128,7 @@ def edit_task(task_id):
         db.session.commit()
 
         flash('Task updated successfully!', 'success')
-        return redirect(url_for('app.task', task_id=task.id))
+        return redirect(url_for('app.get_all_tasks'))
 
     return render_template('edit_task.html', task=task)
 
