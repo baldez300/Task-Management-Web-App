@@ -17,3 +17,8 @@ dummy.txt
 zForDummyStaff.md
 ```
 projectInfo.md
+
+# Modified html files names
+/templates/new_task.html
+/templates/task.html
+/templates/tasks.html

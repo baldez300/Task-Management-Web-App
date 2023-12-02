@@ -19,6 +19,13 @@
         <ul>
             <li><a href="{{ url_for('app.index') }}">Home</a></li>
             <li><a href="{{ url_for('app.get_all_tasks') }}">Tasks</a></li>
+            <li><a href="{{ url_for('app.create_new_task') }}">Create New Task</a></li>
+            <!-- Loop through tasks and generate links dynamically -->
+        {% for task in tasks %}
+            <li><a href="{{ url_for('app.get_task_by_id', task_id=task.id) }}">Task ID:{{ task.id }}</a></li>
+            <li><a href="{{ url_for('app.edit_task', task_id=task.id) }}">Edit Task ID:{{ task.id }}</a></li>
+            <li><a href="{{ url_for('app.delete_task', task_id=task.id) }}">Delete Task ID:{{ task.id }}</a></li>
+        {% endfor %}
             <!-- Add additional menu items as needed -->
         </ul>
     </nav>

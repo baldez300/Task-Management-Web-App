@@ -101,7 +101,7 @@ def create_new_task():
         db.session.commit()
 
         flash('Task created successfully!', 'success')
-        return redirect(url_for('app.tasks'))
+        return redirect(url_for('app.get_all_tasks'))
 
     return render_template('create_new_task.html')
 
@@ -109,7 +109,7 @@ def create_new_task():
 @login_required
 def get_task_by_id(task_id):
     task = Task.query.get_or_404(task_id)
-    return render_template('get_task_byId.html', task=task)
+    return render_template('get_task_by_id.html', task=task)
 
 @blueprint.route('/tasks/<int:task_id>/edit', methods=['GET', 'POST'])
 @login_required
@@ -128,7 +128,7 @@ def edit_task(task_id):
         db.session.commit()
 
         flash('Task updated successfully!', 'success')
-        return redirect(url_for('app.task', task_id=task.id))
+        return redirect(url_for('app.get_all_tasks'))
 
     return render_template('edit_task.html', task=task)
 
@@ -143,6 +143,6 @@ def delete_task(task_id):
         db.session.commit()
 
         flash('Task deleted successfully!', 'success')
-        return redirect(url_for('app.tasks'))
+        return redirect(url_for('app.get_all_tasks'))
 
     return render_template('delete_task.html', task=task)
