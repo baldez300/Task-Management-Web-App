@@ -173,3 +173,57 @@ This command initializes the migration environment. It creates a migrations dire
     flask db upgrade
     ```
 15. If you want to clean up the migration history completely, you can manually delete the migrations directory and the alembic_version table in your database.
+
+    ```bash
+    rm -r migrations
+    ```
+    ```sql
+    USE task_manager;
+    DROP TABLE alembic_version;
+    DROP TABLE task;
+    DROP TABLE user;
+    ```
+    Then, run the following commands to create a new migration history and upgrade the database:
+
+    ```bash
+    flask db init
+    flask db migrate -m "Initial migration"
+    flask db upgrade
+    ```
+16. How to make your MariaDB server running from the terminal command line on macOS:
+
+    ```bash
+    sudo mysql.server start
+    mysql
+    ```
+    ```sql
+    USE task_manager;
+    SELECT * FROM user;
+    SELECT * FROM task;
+    ```
+17. How to make your MariaDB server running from the terminal command line on Windows:
+
+    ```bash
+    mysqld
+    mysql -u root -p
+    ```
+    ```sql
+    USE task_manager;
+    SELECT * FROM user;
+    SELECT * FROM task;
+    ```
+18. Then you should be able to see the following tables:
+
+    ```sql
+    +------------------------+
+    | Tables_in_task_manager |
+    +------------------------+
+    | alembic_version        |
+    | task                   |
+    | user                   |
+    +------------------------+
+    3 rows in set (0.00 sec)
+    ```
+19. An example picture of the user and task tables:
+
+    ![alt text](app/templates/image/db_picture.png)
