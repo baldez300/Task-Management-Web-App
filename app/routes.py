@@ -4,12 +4,14 @@ from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db, login_manager
 from .models import User, Task
+from sqlalchemy.exc import IntegrityError
 
 blueprint = Blueprint('app', __name__)
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
 
 @blueprint.route('/register', methods=['GET', 'POST'])
 def register():
@@ -28,13 +30,18 @@ def register():
 
         new_user = User(firstname=firstname, lastname=lastname, email=email, username=username, password=hashed_password)
 
-        db.session.add(new_user)
-        db.session.commit()
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            flash('Your account has been created! You can now log in.', 'success')
+            return redirect(url_for('app.login'))
 
-        flash('Your account has been created! You can now log in.', 'success')
-        return redirect(url_for('app.login'))
+        except IntegrityError:
+            db.session.rollback()
+            flash('This email is already registered. Please use a different email or log in.', 'danger')
 
     return render_template('register.html')
+
 
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
@@ -55,6 +62,7 @@ def login():
 
     return render_template('login.html')
 
+
 @blueprint.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
@@ -64,16 +72,19 @@ def logout():
         return redirect(url_for('app.login'))
     return render_template('index.html')
 
+
 @blueprint.route('/')
 @login_required
 def index():
     return render_template('index.html')
+
 
 @blueprint.route('/tasks')
 @login_required
 def get_all_tasks():
     tasks = Task.query.filter_by(user_id=current_user.id).all()
     return render_template('get_all_tasks.html', tasks=tasks)
+
 
 @blueprint.route('/tasks/new', methods=['GET', 'POST'])
 @login_required
@@ -105,11 +116,13 @@ def create_new_task():
 
     return render_template('create_new_task.html')
 
+
 @blueprint.route('/tasks/<int:task_id>')
 @login_required
 def get_task_by_id(task_id):
     task = Task.query.get_or_404(task_id)
     return render_template('get_task_by_id.html', task=task)
+
 
 @blueprint.route('/tasks/<int:task_id>/edit', methods=['GET', 'POST'])
 @login_required
@@ -131,6 +144,7 @@ def edit_task(task_id):
         return redirect(url_for('app.get_all_tasks'))
 
     return render_template('edit_task.html', task=task)
+
 
 @blueprint.route('/tasks/<int:task_id>/delete', methods=['GET', 'POST'])
 @login_required
