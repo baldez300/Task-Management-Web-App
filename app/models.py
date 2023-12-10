@@ -4,6 +4,8 @@
 from . import db
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+from sqlalchemy import DateTime
+from datetime import datetime
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,3 +24,5 @@ class Task(db.Model):
     status = db.Column(db.String(50))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('tasks', lazy=True))
+    created = db.Column(DateTime, default=datetime.utcnow)
+    last_updated = db.Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

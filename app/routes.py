@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db, login_manager
 from .models import User, Task
 from sqlalchemy.exc import IntegrityError
+from datetime import datetime
 
 blueprint = Blueprint('app', __name__)
 
@@ -104,7 +105,9 @@ def create_new_task():
             due_date=due_date,
             priority=priority,
             status=status,
-            user_id=current_user.id
+            user_id=current_user.id,
+            created=datetime.utcnow(),
+            last_updated=datetime.utcnow()
         )
 
         # Add the task to the database
@@ -135,7 +138,8 @@ def edit_task(task_id):
         task.description = request.form['description']
         task.due_date = request.form['due_date']
         task.priority = request.form['priority']
-        task.status = request.form['status']
+        task.status = request.form['status'],
+        task.last_updated = datetime.utcnow()
 
         # Commit changes to the database
         db.session.commit()
