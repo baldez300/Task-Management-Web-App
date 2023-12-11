@@ -227,3 +227,21 @@ This command initializes the migration environment. It creates a migrations dire
 19. An example picture of the user and task tables:
 
     ![alt text](app/templates/image/db_picture.png)
+
+20. How to drop the database task table:
+The correct version is the revision number of the last successfully applied migration. You can find this by looking at the filenames of your migration scripts in the `migrations/versions` directory. The revision number is the string before the underscore in the filename.
+
+    ```sql
+    USE task_manager;
+    SELECT * FROM alembic_version;
+    UPDATE alembic_version SET version_num = 'your_correct_version';
+    SELECT * FROM task;
+    ```
+
+    ``` bash
+    pip install Flask-Migrate
+    export FLASK_APP=run.py
+    flask db init
+    flask db migrate -m "Added created and last_updated fields to Task model"
+    flask db upgrade
+    ```
