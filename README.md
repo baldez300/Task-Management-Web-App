@@ -245,3 +245,41 @@ The correct version is the revision number of the last successfully applied migr
     flask db migrate -m "Added created and last_updated fields to Task model"
     flask db upgrade
     ```
+
+Screenshots of the application:
+
+1. Register page:
+
+![alt text](app/templates/image/register.png)
+
+2. Login page:
+
+![alt text](app/templates/image/login.png)
+
+3. Home page:
+
+![alt text](app/templates/image/home.png)
+
+4. Create task page:
+
+![alt text](app/templates/image/create_task.png)
+
+5. Task list page:
+
+![alt text](app/templates/image/task_list.png)
+
+6. Update task page:
+
+![alt text](app/templates/image/edit_task.png)
+
+7. Delete task page:
+
+![alt text](app/templates/image/delete_task.png)
+
+8. Logout page:
+
+![alt text](app/templates/image/logout.png)
+
+9. Database tables after created and last_updated columns added to the Task model:
+
+![alt text](app/templates/image/db_picture_2.png)
