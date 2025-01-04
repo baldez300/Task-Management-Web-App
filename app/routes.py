@@ -75,8 +75,10 @@ def logout():
 
 
 @blueprint.route('/')
-@login_required
+#@login_required
 def index():
+    if not current_user.is_authenticated:
+        return redirect(url_for('app.login'))
     return render_template('index.html')
 
 
@@ -159,6 +161,7 @@ def delete_task(task_id):
         # Remove the task from the database
         db.session.delete(task)
         db.session.commit()
+        task.last_updated = datetime.utcnow()
 
         flash('Task deleted successfully!', 'success')
         return redirect(url_for('app.get_all_tasks'))
